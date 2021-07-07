@@ -18,24 +18,11 @@ public class Client implements Runnable  {
     public void run() {
         try {
             while (true) {
-                String s = "{\n" +
-                        "   \"headers\":{\n" +
-                        "      \"action\":\"UPDATE\"\n" +
-                        "   },\n" +
-                        "   \"body\":{\n" +
-                        "      \"name\":\"”Hobbit”\",\n" +
-                        "      \"content\":\"Some String Data\"\n" +
-                        "   }\n" +
-                        "}";
-
                 Gson gson = new Gson();
                 try {
                     System.out.println("socket is running");
                     socket = null;
                     socket = new Socket("localhost", 5000);
-                    objectInputStream = new ObjectInputStream(socket.getInputStream());
-                    objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-                    HandleRequest request = new HandleRequest(socket, objectInputStream, objectOutputStream);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -44,8 +31,6 @@ public class Client implements Runnable  {
 
 
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         } finally {
             try {
                 cin.close();

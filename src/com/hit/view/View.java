@@ -11,11 +11,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class View extends JFrame {
@@ -47,34 +42,6 @@ public class View extends JFrame {
     private ArrayList<Array> FinalListArray = new ArrayList<>();
     private JLabel text3;
     private JLabel TitleText;
-    String tempString = "{\n" +
-            "  \"fruits\" : [\n" +
-            "  {\n" +
-            "  \"name\" : \"Apple\",\n" +
-            "  \"weight\": 60,\n" +
-            "  \"price\" : 10\n" +
-            "  },\n" +
-            "  {\n" +
-            "  \"name\" : \"Banana\",\n" +
-            "  \"weight\": 100,\n" +
-            "  \"price\" : 20\n" +
-            "  },\n" +
-            "  {\n" +
-            "  \"name\" : \"Apricots\",\n" +
-            "  \"weight\": 120,\n" +
-            "  \"price\" : 30\n" +
-            "  }\n" +
-            "],\n" +
-            "\"totalPrice\" :  [\n" +
-            "  {\n" +
-            "    \"price\": 50\n" +
-            "  }\n" +
-            "],\n" +
-            "\"buyingOptionAlgo\": [\n" +
-            "  {\n" +
-            "    \"buyingOptionAlgo\": \"oneOrZero\"\n" +
-            "  }\n" +
-            "]}";
     String s2 = "[\n" +
             "  {\n" +
             "    \"id\": 1,\n" +
@@ -210,7 +177,6 @@ public class View extends JFrame {
         //cartObject.Totalprice = getMaxAmount(); // To fix
         cartObject.buyingOptionAlgo = getAlgo();
         Gson gSon = new Gson();
-        //System.out.println(gSon.toJson(cartObject));
         return gSon.toJson(cartObject);
     }
 
@@ -322,23 +288,7 @@ public class View extends JFrame {
         add (txtmax);
         add (text3);
         add (TitleText);
-// Old ui
-//        list1.setBounds (15, 25, 230, 265);
-//        list2.setBounds (365, 25, 250, 270);
-//        text2.setBounds (450, 0, 100, 25);
-//        text1.setBounds (100, 0, 100, 25);
-//        checkAlgo1.setBounds (30, 390, 65, 25);
-//        checkAlgo2.setBounds (30, 370, 60, 25);
-//        rmvBtn.setBounds (260, 155, 100, 25);
-//        resetBtn.setBounds (260, 185, 100, 25);
-//        addBtn.setBounds (260, 130, 100, 25);
-//        goBtn.setBounds (140, 340, 70, 65);
-//        list3.setBounds (220, 325, 395, 245);
-//        textGList.setBounds (230, 300, 145, 25);
-//        txtServer.setBounds (135, 405, 100, 25);
-//        txtfMax.setBounds (30, 345, 100, 25);
-//        txtmax.setBounds (45, 325, 85, 20);
-//        AppTitle.setBounds (420, 5, 65, 20);
+
         list1.setBounds (40, 75, 240, 325);
         list2.setBounds (450, 75, 245, 325);
         TitleText.setBounds (290, 10, 140, 35);

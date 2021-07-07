@@ -27,21 +27,11 @@ public class HandleRequest<T> implements Runnable , Serializable {
     @Override
     public void run() {
         while(!socket.isClosed()){
-            String s = "{\n" +
-                    "   \"headers\":{\n" +
-                    "      \"action\":\"UPDATE\"\n" +
-                    "   },\n" +
-                    "   \"body\":{\n" +
-                    "      \"name\":\"”Hobbit”\",\n" +
-                    "      \"content\":\"Some String Data\"\n" +
-                    "   }\n" +
-                    "}";
 
             try {
                     response = gson_handler.fromJson((String)inStream.readObject(),Response.class);
                     outStream = new ObjectOutputStream(socket.getOutputStream());
                     outStream.writeObject(response);
-                    outStream.writeObject(s);
                     inStream = new ObjectInputStream(socket.getInputStream());
                     request = gson_handler.fromJson((String)inStream.readObject(),Request.class);
                     System.out.println(request.headers.getAction());
