@@ -248,8 +248,8 @@ public class View extends JFrame {
         list2 = new JList (model2);
         text2 = new JLabel ("Your Shopping list");
         text1 = new JLabel ("Products list");
-        checkAlgo1 = new JCheckBox ("One or zero items");
-        checkAlgo2 = new JCheckBox ("Unbounded same item");
+        checkAlgo1 = new JCheckBox ("One or zero items ");
+        checkAlgo2 = new JCheckBox ("Unbounded same item ");
         rmvBtn = new JButton ("Remove");
         resetBtn = new JButton ("Reset");
         addBtn = new JButton ("Add");
