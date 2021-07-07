@@ -40,6 +40,7 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             viewModel.getUIParamToJSON();
+            viewModel.infoBox();
 
         }
     }
@@ -47,6 +48,7 @@ public class Controller {
         viewModel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         viewModel.setSize(450, 450);
         viewModel.setVisible(true);
+        viewModel.pack();
     }
 
 }

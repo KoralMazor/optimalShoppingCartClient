@@ -2,7 +2,7 @@ package com.hit.view;
 
 import com.google.gson.Gson;
 import com.hit.dm.CartObject;
-import com.hit.dm.Fruit;
+import com.hit.dm.Array;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -11,6 +11,11 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class View extends JFrame {
@@ -37,8 +42,11 @@ public class View extends JFrame {
     private DefaultListModel model;
     private DefaultListModel model2;
     private DefaultListModel model3;
-    private ArrayList<Fruit> TenmpArray = new ArrayList<>();
-    private ArrayList<Fruit> FinalListArray = new ArrayList<>();
+    private JLabel AppTitle;
+    private ArrayList<Array> TenmpArray = new ArrayList<>();
+    private ArrayList<Array> FinalListArray = new ArrayList<>();
+    private JLabel text3;
+    private JLabel TitleText;
     String tempString = "{\n" +
             "  \"fruits\" : [\n" +
             "  {\n" +
@@ -67,138 +75,133 @@ public class View extends JFrame {
             "    \"buyingOptionAlgo\": \"oneOrZero\"\n" +
             "  }\n" +
             "]}";
-    String s2 = "{\n" +
+    String s2 = "[\n" +
+            "  {\n" +
+            "    \"id\": 1,\n" +
+            "    \"name\" : \"Apple\",\n" +
+            "    \"weight\": 60,\n" +
+            "    \"price\" : 10\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"id\": 2,\n" +
+            "    \"name\" : \"Banana\",\n" +
+            "    \"weight\": 100,\n" +
+            "    \"price\" : 20\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"id\": 3,\n" +
+            "    \"name\" : \"Apricots\",\n" +
+            "    \"weight\": 120,\n" +
+            "    \"price\" : 30\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"id\": 4,\n" +
+            "    \"name\" : \"Avocado\",\n" +
+            "    \"weight\": 30,\n" +
+            "    \"price\" : 6\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"id\": 5,\n" +
+            "    \"name\" : \"Pineapple\",\n" +
+            "    \"weight\": 14,\n" +
+            "    \"price\" : 3\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"id\": 6,\n" +
+            "    \"name\" : \"Blueberries\",\n" +
+            "    \"weight\": 16,\n" +
+            "    \"price\" : 4\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"id\": 7,\n" +
+            "    \"name\" : \"Coconut\",\n" +
+            "    \"weight\": 9,\n" +
+            "    \"price\" : 2\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"id\": 8,\n" +
+            "    \"name\" : \"Grapefruit\",\n" +
+            "    \"weight\": 5,\n" +
+            "    \"price\" : 2\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"id\": 9,\n" +
+            "    \"name\" : \"Guava\",\n" +
+            "    \"weight\": 12,\n" +
+            "    \"price\" : 10\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"id\": 10,\n" +
+            "    \"name\" : \"Mango\",\n" +
+            "    \"weight\": 60,\n" +
+            "    \"price\" : 10\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"id\": 11,\n" +
+            "    \"name\":\"Cabbage\",\n" +
+            "    \"weight\": 100,\n" +
+            "    \"price\": 20\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"id\": 12,\n" +
+            "    \"name\":\"Garlic\",\n" +
+            "    \"weight\": 30,\n" +
+            "    \"price\": 6\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"id\": 13,\n" +
+            "    \"name\":\"Tomatoes\",\n" +
+            "    \"weight\": 120,\n" +
+            "    \"price\": 30\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"id\": 14,\n" +
+            "    \"name\":\"Carrots\",\n" +
+            "    \"weight\": 14,\n" +
+            "    \"price\": 3\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"id\": 15,\n" +
+            "    \"name\":\"Onions\",\n" +
+            "    \"weight\": 2,\n" +
+            "    \"price\": 17\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"id\": 16,\n" +
+            "    \"name\":\"Potatoes\",\n" +
+            "    \"weight\": 3,\n" +
+            "    \"price\": 80\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"id\": 17,\n" +
+            "    \"name\" : \"Artichoke\",\n" +
+            "    \"weight\": 10,\n" +
+            "    \"price\" : 100\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"id\": 18,\n" +
+            "    \"name\" : \"Arugula\",\n" +
+            "    \"weight\": 9,\n" +
+            "    \"price\" : 2\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"id\": 19,\n" +
+            "    \"name\" : \"Broccoli\",\n" +
+            "    \"weight\": 2,\n" +
+            "    \"price\" : 30\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"id\": 20,\n" +
+            "    \"name\" : \"Lettuce\",\n" +
+            "    \"weight\": 16,\n" +
+            "    \"price\" : 4\n" +
+            "  }\n" +
+            "]\n" +
             "\n" +
-            "  \"fruits\" : [\n" +
-            "    {\n" +
-            "      \"name\" : \"Apple\",\n" +
-            "      \"image\" : \"https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/265px-Red_Apple.jpg\",\n" +
-            "      \"weight\": 3,\n" +
-            "      \"price\" : 35\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"name\" : \"Banana\",\n" +
-            "      \"image\" : \"https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Bananas_white_background_DS.jpg/320px-Bananas_white_background_DS.jpg\",\n" +
-            "      \"weight\": 21,\n" +
-            "      \"price\" : 12\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"name\" : \"Apricots\",\n" +
-            "      \"image\" : \"https://halfyourplate-4kgxi1gvwldjzby.stackpathdns.com/wp-content/uploads/2015/01/apricot_small.jpg\",\n" +
-            "      \"weight\": 1,\n" +
-            "      \"price\" : 45\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"name\" : \"Avocado\",\n" +
-            "      \"image\" : \"https://halfyourplate-4kgxi1gvwldjzby.stackpathdns.com/wp-content/uploads/2015/01/avocado_small.jpg\",\n" +
-            "      \"weight\": 7,\n" +
-            "      \"price\" : 200\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"name\" : \"Pineapple\",\n" +
-            "      \"image\" : \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Pineapple_and_cross_section.jpg/286px-Pineapple_and_cross_section.jpg\",\n" +
-            "      \"weight\": 122,\n" +
-            "      \"price\" : 200\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"name\" : \"Blueberries\",\n" +
-            "      \"image\" : \"https://halfyourplate-4kgxi1gvwldjzby.stackpathdns.com/wp-content/uploads/2015/01/blueberries_small.jpg\",\n" +
-            "      \"weight\": 31,\n" +
-            "      \"price\" : 200\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"name\" : \"Coconut\",\n" +
-            "      \"image\" : \"https://halfyourplate-4kgxi1gvwldjzby.stackpathdns.com/wp-content/uploads/2015/01/coconutmeat_small.gif\",\n" +
-            "      \"weight\": 2311,\n" +
-            "      \"price\" : 200\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"name\" : \"Grapefruit\",\n" +
-            "      \"image\" : \"https://halfyourplate-4kgxi1gvwldjzby.stackpathdns.com/wp-content/uploads/2015/01/grapefruit_samll.gif\",\n" +
-            "      \"weight\": 5,\n" +
-            "      \"price\" : 200\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"name\" : \"Guava\",\n" +
-            "      \"image\" : \"https://halfyourplate-4kgxi1gvwldjzby.stackpathdns.com/wp-content/uploads/2015/01/guava_small.jpg\",\n" +
-            "      \"weight\": 12,\n" +
-            "      \"price\" : 200\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"name\" : \"Mango\",\n" +
-            "      \"image\" : \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Pineapple_and_cross_section.jpg/286px-Pineapple_and_cross_section.jpg\",\n" +
-            "      \"weight\": 8,\n" +
-            "      \"price\" : 200\n" +
-            "    }\n" +
-            "  ],\n" +
-            "  \"vegetables\" : [\n" +
-            "    {\n" +
-            "      \"name\":\"Cabbage\",\n" +
-            "      \"photo_url\":\"https://www.freepngimg.com/thumb/categories/2970.png\",\n" +
-            "      \"weight\": 12,\n" +
-            "      \"price\": 30\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"name\":\"Garlic\",\n" +
-            "      \"photo_url\":\"https://www.freepngimg.com/thumb/garlic/2-2-garlic-transparent-thumb.png\",\n" +
-            "      \"weight\": 5,\n" +
-            "      \"price\": 20\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"name\":\"Tomatoes\",\n" +
-            "      \"photo_url\":\"https://www.freepngimg.com/thumb/categories/2985.png\",\n" +
-            "      \"weight\": 12,\n" +
-            "      \"price\": 5\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"name\":\"Carrots\",\n" +
-            "      \"photo_url\":\"https://www.freepngimg.com/thumb/categories/2971.png\",\n" +
-            "      \"weight\": 2,\n" +
-            "      \"price\": 60\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"name\":\"Onions\",\n" +
-            "      \"photo_url\":\"https://www.freepngimg.com/thumb/onion/10-red-onion-png-image-thumb.png\",\n" +
-            "      \"weight\": 2,\n" +
-            "      \"price\": 120\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"name\":\"Potatoes\",\n" +
-            "      \"photo_url\":\"https://www.freepngimg.com/thumb/potato/7-potato-png-images-pictures-download-thumb.png\",\n" +
-            "      \"weight\": 3,\n" +
-            "      \"price\": 80\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"name\" : \"Artichoke\",\n" +
-            "      \"image\" : \"https://halfyourplate-4kgxi1gvwldjzby.stackpathdns.com/wp-content/uploads/2014/12/artichoke_small.gif\",\n" +
-            "      \"weight\": 2,\n" +
-            "      \"price\" : 200\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"name\" : \"Arugula\",\n" +
-            "      \"image\" : \"https://halfyourplate-4kgxi1gvwldjzby.stackpathdns.com/wp-content/uploads/2014/12/arugula_small.gif\",\n" +
-            "      \"weight\": 2,\n" +
-            "      \"price\" : 200\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"name\" : \"Broccoli\",\n" +
-            "      \"image\" : \"https://halfyourplate-4kgxi1gvwldjzby.stackpathdns.com/wp-content/uploads/2014/12/broccoli_small.jpg\",\n" +
-            "      \"weight\": 2,\n" +
-            "      \"price\" : 200\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"name\" : \"Lettuce,\",\n" +
-            "      \"image\" : \"https://halfyourplate-4kgxi1gvwldjzby.stackpathdns.com/wp-content/uploads/2015/01/lettuceiceberg_small.gif\",\n" +
-            "      \"weight\": 2,\n" +
-            "      \"price\" : 200\n" +
-            "    }\n" +
-            "  ]\n" +
-            "}\n" +
             "\n" +
             "\n" +
             "\n" +
             "\n";
-
     public String getUIParamToJSON(){
         CartObject cartObject = new CartObject();
         for(int i = 0 ; i < list2.getModel().getSize();i++){
@@ -232,6 +235,7 @@ public class View extends JFrame {
         return null;
     }
     public void SendBtnListner(ActionListener actionListener){
+
         goBtn.addActionListener(actionListener);
     }
     public void addBtnListner(ActionListener actionListener){
@@ -256,12 +260,19 @@ public class View extends JFrame {
         model2.addElement(model.get(selectedIdx));
         FinalListArray.add(TenmpArray.get(selectedIdx));
     }
+    public void LloadOptimalList(){
+
+    }
     public static void loadUI(){
         View view = new View();
         view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         view.setSize(450, 450);
         view.setVisible(true);
     }
+        public static void infoBox()
+        {
+            JOptionPane.showMessageDialog(null, "Your request was sent to server", "Sent!" , JOptionPane.INFORMATION_MESSAGE);
+        }
     public View() {
         super("Optimal Cart");
          model = new DefaultListModel();
@@ -269,8 +280,8 @@ public class View extends JFrame {
          model3 = new DefaultListModel();
         list1 = new JList (model);
         list2 = new JList (model2);
-        text2 = new JLabel ("Your list");
-        text1 = new JLabel ("Our list");
+        text2 = new JLabel ("Your Shopping list");
+        text1 = new JLabel ("Products list");
         checkAlgo1 = new JCheckBox ("Algo 1");
         checkAlgo2 = new JCheckBox ("Algo 2");
         rmvBtn = new JButton ("Remove");
@@ -283,13 +294,14 @@ public class View extends JFrame {
         txtfMax = new JTextField (5);
         txtmax = new JLabel ("Max Amount");
         popup = new JWindow();
-
+        AppTitle = new JLabel ("AppTitle");
+        text3 = new JLabel (" Your Optimal Shopping Cart");
+        TitleText = new JLabel ("Optimal Shopping Cart");
         //adjust size and set layout
-        setPreferredSize (new Dimension (944, 572));
-        setLayout (null);
-
-        add(new JScrollPane(list1));
-        add(new JScrollPane(list2));
+        setPreferredSize (new Dimension (701, 629));
+        setContentPane(new JLabel(new ImageIcon(View.class
+                .getClassLoader().getResource("back.jpg"))));
+        setLayout(null);
         list1.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         list2.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         //add components
@@ -308,22 +320,39 @@ public class View extends JFrame {
         add (txtServer);
         add (txtfMax);
         add (txtmax);
-
-        list1.setBounds (15, 25, 230, 265);
-        list2.setBounds (365, 25, 250, 270);
-        text2.setBounds (450, 0, 100, 25);
-        text1.setBounds (100, 0, 100, 25);
-        checkAlgo1.setBounds (30, 390, 65, 25);
-        checkAlgo2.setBounds (30, 370, 60, 25);
-        rmvBtn.setBounds (260, 155, 100, 25);
-        resetBtn.setBounds (260, 185, 100, 25);
-        addBtn.setBounds (260, 130, 100, 25);
-        goBtn.setBounds (140, 340, 70, 65);
-        list3.setBounds (220, 325, 395, 245);
-        textGList.setBounds (230, 300, 145, 25);
-        txtServer.setBounds (135, 405, 100, 25);
-        txtfMax.setBounds (30, 345, 100, 25);
-        txtmax.setBounds (45, 325, 85, 20);
+        add (text3);
+        add (TitleText);
+// Old ui
+//        list1.setBounds (15, 25, 230, 265);
+//        list2.setBounds (365, 25, 250, 270);
+//        text2.setBounds (450, 0, 100, 25);
+//        text1.setBounds (100, 0, 100, 25);
+//        checkAlgo1.setBounds (30, 390, 65, 25);
+//        checkAlgo2.setBounds (30, 370, 60, 25);
+//        rmvBtn.setBounds (260, 155, 100, 25);
+//        resetBtn.setBounds (260, 185, 100, 25);
+//        addBtn.setBounds (260, 130, 100, 25);
+//        goBtn.setBounds (140, 340, 70, 65);
+//        list3.setBounds (220, 325, 395, 245);
+//        textGList.setBounds (230, 300, 145, 25);
+//        txtServer.setBounds (135, 405, 100, 25);
+//        txtfMax.setBounds (30, 345, 100, 25);
+//        txtmax.setBounds (45, 325, 85, 20);
+//        AppTitle.setBounds (420, 5, 65, 20);
+        list1.setBounds (40, 75, 240, 325);
+        list2.setBounds (450, 75, 245, 325);
+        TitleText.setBounds (290, 10, 140, 35);
+        text1.setBounds (110, 50, 100, 25);
+        text2.setBounds (510, 50, 125, 25);
+        addBtn.setBounds (315, 175, 100, 25);
+        rmvBtn.setBounds (315, 215, 100, 25);
+        txtmax.setBounds (90, 410, 145, 30);
+        txtfMax.setBounds (85, 435, 130, 25);
+        checkAlgo1.setBounds (65, 455, 170, 30);
+        checkAlgo2.setBounds (65, 485, 180, 25);
+        goBtn.setBounds (275, 430, 80, 75);
+        list3.setBounds (375, 425, 315, 185);
+        text3.setBounds (460, 400, 200, 25);
 
         titleLabel = new JLabel();
         titleLabel.setBackground(Color.WHITE);
@@ -342,10 +371,9 @@ public class View extends JFrame {
 
 
         // Load Json
-        JSONObject jsonObject = new JSONObject(s2);
-        JSONArray fruits = jsonObject.getJSONArray("fruits");
+        JSONArray fruits = new JSONArray(s2);
         for(int i = 0 ; i < fruits.length() ; i++){
-            Fruit tempFruit = new Fruit();
+            Array tempFruit = new Array();
             tempFruit.setName(fruits.getJSONObject(i).getString("name"));
             tempFruit.setWeight(fruits.getJSONObject(i).getInt("weight"));
             tempFruit.setPrice(fruits.getJSONObject(i).getInt("price"));
@@ -360,6 +388,11 @@ public class View extends JFrame {
 
 
         list1.addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                popup.setVisible(false);
+            }
+
             public void mouseMoved(MouseEvent me) {
                 Object value = list1.getSelectedValue();
                 Point p = new Point(me.getX(), me.getY());
@@ -388,8 +421,43 @@ public class View extends JFrame {
             }
 
         });
+        list2.addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                popup.setVisible(false);
+            }
+
+            public void mouseMoved(MouseEvent me) {
+                Object value = list2.getSelectedValue();
+                Point p = new Point(me.getX(), me.getY());
+                int index = list2.locationToIndex(p);
+                if (value != null) {
+                    if (index != mHoveredJListIndex) {
+                        mHoveredJListIndex = index;
+                        list1.repaint();
+                        popup.setLocation(list2.getLocationOnScreen().x + list2.getWidth(),
+                                list1.getLocationOnScreen().y);
+                        popup.setContentPane(contentPanel);
+                        popup.revalidate();
+                        popup.pack();
+                        popup.setVisible(true);
+                        int selectedIdx = list1.getSelectionModel().getAnchorSelectionIndex();
+                        titleLabel.setText("Price : "+TenmpArray.get(selectedIdx).getPrice());
+                        textPane.setText("Weight : "+TenmpArray.get(selectedIdx).getWeight());
+                        clicks++;
+                    }
+                }else{
+                    if (popup.isVisible()) {
+                        popup.setVisible(false);
+                    }
+                }
+
+            }
+
+        });
 
     }
+
 
 }
 

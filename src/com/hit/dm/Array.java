@@ -3,7 +3,7 @@ package com.hit.dm;
 
 import java.util.List;
 
-public class Fruit {
+public class Array {
             public String name;
             public int weight;
             public int price;
